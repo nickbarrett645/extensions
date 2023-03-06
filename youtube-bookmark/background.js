@@ -1,3 +1,9 @@
+const EVENTS = {
+    NEW: 'NEW',
+    PLAY: 'PLAY',
+    DELETE: 'DELETE'
+};
+
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
 
     if(tab.url && tab.url.includes('youtube.com/watch')) {
@@ -5,7 +11,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         const urlParameters = new URLSearchParams(queryParameters);
         
         const response = await chrome.tabs.sendMessage(tabId, {
-            type: 'NEW',
+            type: EVENTS.NEW,
             videoId: urlParameters.get('v')
         }); 
     }

@@ -2,16 +2,21 @@
     let youtubeLeftControls, youtubePlayer;
     let currentVideo = '';
     let currenVideoBookmarks = [];
+    const EVENTS = {
+        NEW: 'NEW',
+        PLAY: 'PLAY',
+        DELETE: 'DELETE'
+    }
 
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const {type, value, videoId} = message;
 
-        if(type === 'NEW') {
+        if(type === EVENTS.NEW) {
             currentVideo = videoId;
             newVideoLoaded();
-        } else if(type === 'PLAY') {
+        } else if(type === EVENTS.PLAY) {
             youtubePlayer.currentTime = value;
-        } else if(type === 'DELETE') {
+        } else if(type === EVENTS.DELETE) {
             currenVideoBookmarks = currenVideoBookmarks.filter((b) => b.time != value);
             chrome.storage.sync.set({[currentVideo]: JSON.stringify(currenVideoBookmarks)});
 

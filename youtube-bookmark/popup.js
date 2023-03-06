@@ -1,4 +1,4 @@
-import { getCurrentTab } from "./utils.js";
+import { getCurrentTab, EVENTS } from "./utils.js";
 
 const addNewBookmark = (bookmarkElement, bookmark) => {
     const bookmarkTitleElement = document.createElement('div');
@@ -42,7 +42,7 @@ const onPlay = async e => {
     const currentTab = await getCurrentTab();
 
     chrome.tabs.sendMessage(currentTab.id, {
-        type: 'PLAY',
+        type: EVENTS.PLAY,
         value: bookmarkTime
     });
 };
@@ -55,7 +55,7 @@ const onDelete = async e => {
     bookmarkElementToDelete.parentNode.removeChild(bookmarkElementToDelete);
 
     chrome.tabs.sendMessage(currentTab.id, {
-        type: 'DELETE',
+        type: EVENTS.DELETE,
         value: bookmarkTime
     }, viewBookmarks);
 };

@@ -1,0 +1,32 @@
+{
+    "name": "Site Blocker",
+    "version": "0.1.0",
+    "description": "Blocks browser from navigating to user added sites.",
+    "permissions": ["storage", "tabs"],
+    "host_permissions": [""],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": [""],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [],
+        "matches": [""]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "",
+        "24": "",
+        "32": ""
+      },
+      "default_title": "Site Blocker",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
